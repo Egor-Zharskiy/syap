@@ -20,7 +20,8 @@ def get_menu():
     3 - Количество продукта
     4 - Просмотр информации о продукте
     5 - Купить
-    6 - Завершение работы программы\n
+    6 - Просмотр вашей корзины
+    7 - Завершение работы программы\n
     """
 
 
@@ -40,7 +41,7 @@ class Basket:
         return res
 
     def __str__(self):
-        return "; ".join(f"{key}, {el[0]}" for key, el in self.__basket.items())
+        return "; ".join(f"{key}: {el[0]}" for key, el in self.__basket.items())
 
 
 class Confectionery:
@@ -77,28 +78,41 @@ basket = Basket()
 
 while True:
     try:
-        print("Десерты:", end=' ')
-        confect.print_keys()
-        product_name = input("Введите название изделия: ")
-        if product_name not in confect.data.keys():
-            raise KeyError
+        # print("Десерты:", end=' ')
+        # confect.print_keys()
+
+        # print("\nМеню:")
+        # for product in confect.data:
+        #     print("____________")
+        #     print(confect.get_info(product))
 
         choice = int(input("Выберите одно из предложенных действий: " + get_menu()))
 
         match choice:
             case 1:
-                print("Описание для", confect.get_formatted(product_name, confect.get_description(product_name), 0))
+                for product_name in confect.data.keys():
+                    print("Описание для", confect.get_formatted(product_name, confect.get_description(product_name), 0))
 
             case 2:
-                print("Цена за 100 гр для", confect.get_formatted(product_name, confect.get_price(product_name), 1))
+                for product_name in confect.data.keys():
+                    print("Цена за 100 гр для", confect.get_formatted(product_name, confect.get_price(product_name), 1))
 
             case 3:
-                print("Количество ", confect.get_formatted(product_name, confect.get_quantity(product_name), 2))
+                for product_name in confect.data.keys():
+                    print("Количество ", confect.get_formatted(product_name, confect.get_quantity(product_name), 2))
 
             case 4:
-                print(confect.get_info(product_name))
+                for product_name in confect.data.keys():
+                    print(confect.get_info(product_name))
 
             case 5:
+                print("Десерты:", end=' ')
+                confect.print_keys()
+
+                product_name = input("Введите название десерта: ")
+                if product_name not in confect.data.keys():
+                    raise KeyError
+
                 quantity = int(input('Введите количество порций (одна порция - 100 грамм), которое вы хотите купить: '))
                 if quantity * 100 > confect.get_quantity(product_name):
                     print("Введено недопустимое значение количества порций")
@@ -113,7 +127,16 @@ while True:
                 print()
 
             case 6:
+                print("Ваша корзина: ", basket)
+
+                print("Стоимость вашей корзины: ", basket.calc_price())
+
+            case 7:
                 exit()
+
+            case _:
+                print("Неверный выбор функции\n")
+
     except KeyError:
         print("\nНеверный ввод названия десерта\n")
     except ValueError:
