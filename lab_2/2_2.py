@@ -1,3 +1,11 @@
+# . Напишите функцию, которая будет принимать один аргумент. Если в
+# функцию передаётся кортеж, то посчитать длину всех его слов.
+# Если список, то сумму после первого отрицательного элемента.
+# Удалить все повторяющиеся элементы.
+# Число – кол-во четных цифр.
+# Строка – найти сумму всех чисел.
+# Сделать проверку со всеми этими случаями
+
 def even_digits(num):
     quantity = 0
     while num > 0:
@@ -6,11 +14,8 @@ def even_digits(num):
             quantity += 1
         num //= 10
 
-    print(f'Количество четных цифр = {quantity}')
+    return quantity
 
-
-# добавить проверку на пустые кортежи и списки
-# возвращать значения из функции а не принтить
 
 def func(var):
     if isinstance(var, tuple):
@@ -18,7 +23,7 @@ def func(var):
         for el in var:
             if isinstance(el, str):
                 length += len(el)
-        print(length)
+        return length
 
     elif isinstance(var, list):
         negative_pos = False
@@ -34,10 +39,11 @@ def func(var):
                         res += var[i]
         unique_var = list(set(var))
         print("Строка после удаления всех повторений: ", unique_var)
-        print('Сумма после первого отрицательного элемента:', res)
+        # print('Сумма после первого отрицательного элемента:', res)
+        return res
 
     elif isinstance(var, int):
-        even_digits(var)
+        return even_digits(var)
 
     elif isinstance(var, str):
         summ = 0
@@ -45,10 +51,15 @@ def func(var):
             if el.isdigit():
                 summ += int(el)
 
-        print("Сумма всех чисел строки: ", summ)
+        # print("Сумма всех чисел строки: ", summ)
+        return summ
 
 
-# func(("a", 'b', 'cde', 123))
-# func([0, 20, 0, -3, 40, 0, 20, 0])
-# func(24681039)
-func(list())
+a = ("a", 'b', 'cde', 123)
+b = [0, 20, 0, -3, 40, 0, 20, 0]
+c = 24681039
+d = "12344dsfkjsd"
+print("Длина всех слов кортежа: ", func(a))
+print("Сумма после первого отрицательного элемента", func(b))
+print("Кол-во четных цифр: ", func(c))
+print("Сумма всех чисел для строки: ", func(d))
