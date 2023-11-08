@@ -26,7 +26,6 @@ class StartWindow(QtWidgets.QMainWindow):
         self.title.setAlignment(QtCore.Qt.AlignCenter)
         self.title.setStyleSheet("color: white")
 
-
         self.setWindowTitle("Викторина")
         self.setWindowIcon(QtGui.QIcon('icon.png'))
         self.setFixedSize(600, 400)
@@ -116,10 +115,3 @@ class StartWindow(QtWidgets.QMainWindow):
         self.pushButton.show()
         self.question_text.setText(self.questions[0]['question'])
         self.title.hide()
-
-#
-# if __name__ == '__main__':
-#     app = QtWidgets.QApplication(sys.argv)
-#     window = StartWindow()
-#     window.show()
-#     sys.exit(app.exec_())
