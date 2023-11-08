@@ -117,9 +117,9 @@ class StartWindow(QtWidgets.QMainWindow):
         self.question_text.setText(self.questions[0]['question'])
         self.title.hide()
 
-
-if __name__ == '__main__':
-    app = QtWidgets.QApplication(sys.argv)
-    window = StartWindow()
-    window.show()
-    sys.exit(app.exec_())
+#
+# if __name__ == '__main__':
+#     app = QtWidgets.QApplication(sys.argv)
+#     window = StartWindow()
+#     window.show()
+#     sys.exit(app.exec_())
